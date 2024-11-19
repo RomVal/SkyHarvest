@@ -2,6 +2,9 @@
   "name": "skyharvest",
   "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "start": "node src/app.js"
+  },
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.4.0",
     "axios": "^1.7.7",
