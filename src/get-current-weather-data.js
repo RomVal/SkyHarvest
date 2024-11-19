@@ -13,8 +13,7 @@ const params = {
   q: 'Kyiv',
 };
 
-// Function to make the request
-export const makeWeatherRequest = async () => {
+export const getCurrentWeatherData = async () => {
   try {
     const response = await axios.get(url, { params });
 

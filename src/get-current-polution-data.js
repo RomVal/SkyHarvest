@@ -11,7 +11,7 @@ const paramsPolution = {
   token: process.env.WAQI_API_TOKEN,
 };
 
-export const makePolutionRequest = async () => {
+export const getCurrentPolutionData = async () => {
   try {
     const response = await axios.get(urlPolution, { params: paramsPolution });
 
