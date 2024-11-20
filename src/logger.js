@@ -1,13 +1,31 @@
 import { db } from './db/db-init.js';
 
+const LOG_LEVELS = {
+  error: 0,
+  warn: 1,
+  info: 2,
+  debug: 3,
+};
+
 class Logger {
-  constructor(collectionName = 'logs', addToDBEnabled = true) {
+  constructor(
+    collectionName = 'logs',
+    logLevel = 'info',
+    addToDBEnabled = true
+  ) {
     this.collectionName = collectionName;
     this.addToDBEnabled = addToDBEnabled;
+    this.logLevel = logLevel;
+  }
+
+  shouldLog(level) {
+    return LOG_LEVELS[level] <= LOG_LEVELS[this.logLevel];
   }
 
   // Method for writing logs
   async log(level, message, metadata = {}) {
+    if (!this.shouldLog(level)) return;
+
     const timestamp = new Date().toISOString();
     const logEntry = {
       message,
@@ -33,12 +51,8 @@ class Logger {
         .doc(`${timestamp} ${level.toUpperCase()}`);
 
       await userRef.set(logEntry);
-
-      console.log(
-        `Log for ${this.collectionName} ${timestamp} sucessfully added.`
-      );
     } catch (error) {
-      console.error('Error when adding logger data', error);
+      console.error('Error when adding logger data to db', error);
     }
   }
 

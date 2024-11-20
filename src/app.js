@@ -8,21 +8,38 @@ const PARSE_INTERVAL = 10000;
 
 const startRequestLoop = () => {
   const makeRequests = async () => {
-    const citiesConfig = loadCitiesConfig();
-    for (const city of citiesConfig) {
-      const combinedData = await getCombinedCityData({
-        cityName: city?.name,
-        trafficConfig: city?.traffic,
+    try {
+      const citiesConfig = loadCitiesConfig();
+      for (const city of citiesConfig) {
+        const combinedData = await getCombinedCityData({
+          cityName: city?.name,
+          trafficConfig: city?.traffic,
+        });
+
+        addRecordtoCity(
+          city?.name,
+          combinedData?.timestamp,
+          combinedData?.data
+        );
+      }
+
+      logger.info(`Data for cities successfully added.`);
+    } catch (error) {
+      logger.error(`Error when adding city data`, {
+        message: error?.message,
       });
-
-      addRecordtoCity(city?.name, combinedData?.timestamp, combinedData?.data);
     }
-
-    logger.info(`Data for cities successfully added.`);
   };
 
   setInterval(makeRequests, PARSE_INTERVAL);
 };
 
 // Start the main loop
-startRequestLoop();
+try {
+  startRequestLoop();
+} catch (startupError) {
+  logger.error(`Fatal error during application startup`, {
+    error: startupError?.message,
+  });
+  process.exit(1);
+}
