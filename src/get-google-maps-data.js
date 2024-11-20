@@ -41,9 +41,9 @@ const parseGoogleMapsResponse = (response) => {
 
   legs
     ? (res = {
-        distance: legs?.distance?.value,
-        duration: legs?.duration?.value,
-        duration_in_traffic: legs?.duration_in_traffic?.value,
+        distance: legs?.distance?.value || null,
+        duration: legs?.duration?.value || null,
+        duration_in_traffic: legs?.duration_in_traffic?.value || null,
       })
     : {};
 

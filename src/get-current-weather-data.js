@@ -28,14 +28,14 @@ const parseWeatherResponse = (response) => {
 
   current
     ? (res = {
-        temp_c: current?.temp_c,
-        wind_kph: current?.wind_kph,
-        gust_kph: current?.gust_kph,
-        pressure_mb: current?.pressure_mb,
-        precip_mm: current?.precip_mm,
-        humidity: current?.humidity,
-        cloud: current?.cloud,
-        dewpoint_c: current?.dewpoint_c,
+        temp_c: current?.temp_c || null,
+        wind_kph: current?.wind_kph || null,
+        gust_kph: current?.gust_kph || null,
+        pressure_mb: current?.pressure_mb || null,
+        precip_mm: current?.precip_mm || null,
+        humidity: current?.humidity || null,
+        cloud: current?.cloud || null,
+        dewpoint_c: current?.dewpoint_c || null,
       })
     : {};
 

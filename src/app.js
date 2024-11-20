@@ -1,5 +1,6 @@
 import { loadCitiesConfig } from './load-cities-config.js';
 import { getCombinedCityData } from './get-combined-city-data.js';
+import { addRecordtoCity } from './db-connector.js';
 
 const PARSE_INTERVAL = 10000;
 
@@ -12,7 +13,7 @@ const startRequestLoop = () => {
         trafficConfig: city?.traffic,
       });
 
-      console.log('COMBINED_DATA', JSON.stringify(combinedData));
+      addRecordtoCity(city?.name, combinedData?.timestamp, combinedData?.data);
     }
   };
 

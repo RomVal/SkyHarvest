@@ -32,12 +32,12 @@ const parsePolutionResponse = (response) => {
   let res = {};
 
   res = {
-    aqi: data?.aqi,
-    pm10: iaqi?.pm10?.v,
-    pm25: iaqi?.pm25?.v,
-    so2: iaqi?.so2?.v,
-    no2: iaqi?.no2?.v,
-    co: iaqi?.co?.v,
+    aqi: data?.aqi || null,
+    pm10: iaqi?.pm10?.v || null,
+    pm25: iaqi?.pm25?.v || null,
+    so2: iaqi?.so2?.v || null,
+    no2: iaqi?.no2?.v || null,
+    co: iaqi?.co?.v || null,
   };
 
   return res;

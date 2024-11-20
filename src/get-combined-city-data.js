@@ -9,8 +9,8 @@ export const getCombinedCityData = async ({ cityName, trafficConfig }) => {
 
   return {
     cityName: cityName?.toLowerCase(),
+    timestamp: new Date().toISOString(),
     data: {
-      time: new Date().toISOString(),
       weather: weatherData,
       traffic: trafficData,
       polution: polutionData,
