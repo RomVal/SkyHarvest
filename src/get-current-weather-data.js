@@ -1,27 +1,18 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
 
-// Load environment variables
 dotenv.config();
 
 // URL to the service
-const url = 'http://api.weatherapi.com/v1/current.json';
+const URL = 'http://api.weatherapi.com/v1/current.json';
 
-// Parameters for the request
-const params = {
-  key: process.env.WEATHER_API_KEY,
-  q: 'Kyiv',
-};
-
-export const getCurrentWeatherData = async () => {
+export const getCurrentWeatherData = async (cityName) => {
+  const params = { key: process.env.WEATHER_API_KEY, q: cityName };
   try {
-    const response = await axios.get(url, { params });
+    const response = await axios.get(URL, { params });
 
-    // If the request was successful (status code 200)
     if (response.status === 200) {
-      console.log(
-        `PARSED_DATA: ${JSON.stringify(parseWeatherResponse(response.data))}`
-      );
+      return parseWeatherResponse(response.data);
     } else {
       console.error(`Error: ${response.status}`);
     }
@@ -30,7 +21,6 @@ export const getCurrentWeatherData = async () => {
   }
 };
 
-// Function to parse the weather response
 const parseWeatherResponse = (response) => {
   const current = response.current;
 

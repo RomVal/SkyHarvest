@@ -1,25 +1,22 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
 
-// Load environment variables
 dotenv.config();
 
-// URL to the service
-const urlPolution = 'http://api.waqi.info/feed/kyiv';
+// Base service URL
+const BASE_URL = 'http://api.waqi.info/feed';
 
 const paramsPolution = {
   token: process.env.WAQI_API_TOKEN,
 };
 
-export const getCurrentPolutionData = async () => {
+export const getCurrentPolutionData = async (cityName) => {
+  const urlPolution = `${BASE_URL}/${cityName}`;
   try {
     const response = await axios.get(urlPolution, { params: paramsPolution });
 
-    // If the request was successful (status code 200)
     if (response.status === 200) {
-      console.log(
-        `POLUTION_DATA: ${JSON.stringify(parsePolutionResponse(response.data))}`
-      );
+      return parsePolutionResponse(response.data);
     } else {
       console.error(`Error: ${response.status}`);
     }

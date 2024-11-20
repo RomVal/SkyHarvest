@@ -4,31 +4,34 @@ import { Client } from '@googlemaps/google-maps-services-js';
 
 dotenv.config();
 
-const origin2 = { lat: 50.429686, lng: 30.541771 }; // Coordinates for Kyiv
-const destination2 = { lat: 50.424613, lng: 30.61942 }; // Coordinates for Lviv
-
 // Initialize the Google Maps client
 const client = new Client();
 const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
-export const getGoogleMapsData = async () => {
+export const getGoogleMapsData = async (trafficData) => {
+  let res = [];
   try {
-    const response = await client.directions({
-      params: {
-        origin: origin2,
-        destination: destination2,
-        mode: 'driving',
-        departure_time: 'now', // Use "now" for immediate departure
-        key: GOOGLE_MAPS_API_KEY,
-      },
-    });
+    for (const traffic of trafficData) {
+      const origin = traffic?.origin;
+      const destination = traffic?.destination;
 
-    console.log(
-      `GOOGLE_MAPS_DATA: ${JSON.stringify(parseGoogleMapsResponse(response.data))}`
-    );
+      const response = await client.directions({
+        params: {
+          origin,
+          destination,
+          mode: 'driving',
+          departure_time: 'now', // Use "now" for immediate departure
+          key: GOOGLE_MAPS_API_KEY,
+        },
+      });
+
+      res.push(parseGoogleMapsResponse(response.data));
+    }
   } catch (error) {
     console.error('Error fetching directions:', error);
   }
+
+  return res;
 };
 
 const parseGoogleMapsResponse = (response) => {
