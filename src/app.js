@@ -3,6 +3,7 @@ import { getCombinedCityData } from './get-combined-city-data.js';
 import { addRecordtoCity } from './db/db-connector.js';
 import { logger } from './logger.js';
 
+// Interval for making requests. As a rule, it should with 1h interval
 const PARSE_INTERVAL = 10000;
 
 const startRequestLoop = () => {
@@ -15,12 +16,13 @@ const startRequestLoop = () => {
       });
 
       addRecordtoCity(city?.name, combinedData?.timestamp, combinedData?.data);
-      logger.info(`Data for ${city?.name} successfully added to the database.`);
     }
+
+    logger.info(`Data for cities successfully added.`);
   };
 
   setInterval(makeRequests, PARSE_INTERVAL);
 };
 
-// Start the loop
+// Start the main loop
 startRequestLoop();

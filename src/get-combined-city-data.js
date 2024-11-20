@@ -1,6 +1,6 @@
-import { getGoogleMapsData } from './get-google-maps-data.js';
-import { getCurrentWeatherData } from './get-current-weather-data.js';
-import { getCurrentPolutionData } from './get-current-polution-data.js';
+import { getGoogleMapsData } from './data-providers/get-google-maps-data.js';
+import { getCurrentWeatherData } from './data-providers/get-current-weather-data.js';
+import { getCurrentPolutionData } from './data-providers/get-current-polution-data.js';
 
 export const getCombinedCityData = async ({ cityName, trafficConfig }) => {
   const weatherData = await getCurrentWeatherData(cityName);

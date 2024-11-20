@@ -1,6 +1,7 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
 import { Client } from '@googlemaps/google-maps-services-js';
+import { logger } from './../logger.js';
 
 dotenv.config();
 
@@ -28,7 +29,9 @@ export const getGoogleMapsData = async (trafficData) => {
       res.push(parseGoogleMapsResponse(response.data));
     }
   } catch (error) {
-    console.error('Error fetching directions:', error);
+    logger.error('Error fetching directions in getGoogleMapsData', {
+      message: error?.message,
+    });
   }
 
   return res;

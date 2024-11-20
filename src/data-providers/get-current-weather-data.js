@@ -1,5 +1,6 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
+import { logger } from './../logger.js';
 
 dotenv.config();
 
@@ -14,10 +15,15 @@ export const getCurrentWeatherData = async (cityName) => {
     if (response.status === 200) {
       return parseWeatherResponse(response.data);
     } else {
-      console.error(`Error: ${response.status}`);
+      logger.error(`Error in getCurrentWeatherData`, {
+        message: response?.message,
+        status: response?.status,
+      });
     }
   } catch (error) {
-    console.error(`Request failed: ${error.message}`);
+    logger.error(`Request failed in getCurrentWeatherData`, {
+      message: error?.message,
+    });
   }
 };
 

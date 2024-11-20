@@ -1,4 +1,5 @@
 import { db } from './db-init.js';
+import { logger } from './../logger.js';
 
 export async function addRecordtoCity(cityName, timestamp, cityData) {
   try {
@@ -6,24 +7,10 @@ export async function addRecordtoCity(cityName, timestamp, cityData) {
 
     await userRef.set(cityData);
 
-    console.log(`Record for ${cityName} ${timestamp} sucessfully added.`);
+    logger.debug(`Data for ${cityName} ${timestamp} sucessfully added to DB.`);
   } catch (error) {
-    console.error('Error when adding city data', error);
-  }
-}
-
-export async function addRecordtoCollection(
-  collectionName,
-  timestamp,
-  cityData
-) {
-  try {
-    const userRef = db.collection(collectionName).doc(timestamp);
-
-    await userRef.set(cityData);
-
-    console.log(`Record for ${collectionName} ${timestamp} sucessfully added.`);
-  } catch (error) {
-    console.error('Error when adding city data', error);
+    logger.error(`Error when adding city data`, {
+      message: error?.message,
+    });
   }
 }

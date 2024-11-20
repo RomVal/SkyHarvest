@@ -1,5 +1,6 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
+import { logger } from './../logger.js';
 
 dotenv.config();
 
@@ -18,10 +19,15 @@ export const getCurrentPolutionData = async (cityName) => {
     if (response.status === 200) {
       return parsePolutionResponse(response.data);
     } else {
-      console.error(`Error: ${response.status}`);
+      logger.error(`Error in getCurrentPolutionData`, {
+        message: response?.message,
+        status: response?.status,
+      });
     }
   } catch (error) {
-    console.error(`Request failed: ${error.message}`);
+    logger.error(`Request failed in getCurrentPolutionData`, {
+      message: error?.message,
+    });
   }
 };
 

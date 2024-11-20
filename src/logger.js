@@ -42,6 +42,10 @@ class Logger {
     }
   }
 
+  debug(message, metadata = {}) {
+    return this.log('debug', message, metadata);
+  }
+
   info(message, metadata = {}) {
     return this.log('info', message, metadata);
   }
@@ -55,5 +59,4 @@ class Logger {
   }
 }
 
-// Create a logger instance
 export const logger = new Logger();
