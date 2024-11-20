@@ -1,6 +1,7 @@
 import { loadCitiesConfig } from './load-cities-config.js';
 import { getCombinedCityData } from './get-combined-city-data.js';
-import { addRecordtoCity } from './db-connector.js';
+import { addRecordtoCity } from './db/db-connector.js';
+import { logger } from './logger.js';
 
 const PARSE_INTERVAL = 10000;
 
@@ -14,6 +15,7 @@ const startRequestLoop = () => {
       });
 
       addRecordtoCity(city?.name, combinedData?.timestamp, combinedData?.data);
+      logger.info(`Data for ${city?.name} successfully added to the database.`);
     }
   };
 
