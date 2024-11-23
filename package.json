@@ -12,7 +12,8 @@
     "axios": "^1.7.7",
     "dotenv": "^16.4.5",
     "firebase": "^11.0.1",
-    "firebase-admin": "^13.0.0"
+    "firebase-admin": "^13.0.0",
+    "got": "^14.4.4"
   },
   "devDependencies": {
     "prettier": "^3.3.3"
