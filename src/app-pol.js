@@ -4,17 +4,19 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Base service URL
-const BASE_URL = 'http://api.waqi.info/feed';
+const BASE_URL = 'http://api.waqi.info/feed/london';
 
 const paramsPolution = {
   token: process.env.WAQI_API_TOKEN,
 };
 
 export const getCurrentPolutionData = async (cityName) => {
-  console.log('KEY: ', process.env.WAQI_API_TOKEN);
-  const sanitizedCityName = cityName.replace(/^\/|\/$/g, '');
-  const urlPolution = new URL(`${BASE_URL}/${sanitizedCityName}`).toString();
-  //const urlPolution = `${BASE_URL}/${cityName}`;
+  console.log('API Key:', process.env.WAQI_API_TOKEN);
+
+  // Sanitize the city name and construct the URL
+  const sanitizedCityName = cityName.trim(); // Remove leading/trailing spaces
+  const urlPolution = new URL(BASE_URL).toString();
+
   try {
     const response = await axios.get(urlPolution, { params: paramsPolution });
 
