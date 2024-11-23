@@ -1,10 +1,10 @@
-import { loadCitiesConfig } from './load-cities-config.js';
-import { getCombinedCityData } from './get-combined-city-data.js';
 import { addRecordtoCity } from './db/db-connector.js';
+import { getCombinedCityData } from './get-combined-city-data.js';
+import { loadCitiesConfig } from './load-cities-config.js';
 import { logger } from './logger.js';
 
 // Interval for making requests. As a rule, it should with 1h interval
-const PARSE_INTERVAL = 10000;
+const PARSE_INTERVAL = 1000 * 60 * 60;
 
 const startRequestLoop = () => {
   const makeRequests = async () => {

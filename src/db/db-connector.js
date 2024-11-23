@@ -1,5 +1,5 @@
-import { db } from './db-init.js';
 import { logger } from './../logger.js';
+import { db } from './db-init.js';
 
 export async function addRecordtoCity(cityName, timestamp, cityData) {
   try {

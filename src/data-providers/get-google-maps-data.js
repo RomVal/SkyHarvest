@@ -1,6 +1,6 @@
-import axios from 'axios';
-import dotenv from 'dotenv';
 import { Client } from '@googlemaps/google-maps-services-js';
+import dotenv from 'dotenv';
+
 import { logger } from './../logger.js';
 
 dotenv.config();

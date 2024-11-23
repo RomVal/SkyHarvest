@@ -32,7 +32,7 @@ class Logger {
       ...(Object.keys(metadata).length > 0 ? metadata : {}),
     };
 
-    // Console
+    // eslint-disable-next-line no-console
     console.log(
       `[${timestamp}] [${level.toUpperCase()}]: ${message}`,
       metadata
@@ -52,6 +52,7 @@ class Logger {
 
       await userRef.set(logEntry);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error when adding logger data to db', error);
     }
   }
