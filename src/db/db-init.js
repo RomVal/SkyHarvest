@@ -1,10 +1,29 @@
 import admin from 'firebase-admin';
+import { promises as fs } from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// eslint-disable-next-line
-import serviceAccount from '../../serviceAccountKey.json' assert { type: 'json' };
-import { logger } from '../logger';
+import { logger } from './../logger.js';
+
+// Helper to get the directory name in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+async function getServiceAccount() {
+  try {
+    const filePath = path.join(__dirname, '../../serviceAccountKey.json');
+    const data = await fs.readFile(filePath, 'utf-8');
+    const serviceAccount = JSON.parse(data);
+    return serviceAccount;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error reading service account JSON:', error);
+    throw error;
+  }
+}
 
 try {
+  const serviceAccount = await getServiceAccount();
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
   });
