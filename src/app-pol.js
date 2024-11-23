@@ -1,39 +1,29 @@
-import got from 'got';
+import axios from 'axios';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const BASE_URL = `http://api.waqi.info/feed/`;
+const BASE_URL = `http://api.waqi.info/feed/london`;
 
-// Query parameters
 const paramsPolution = {
   token: process.env.WAQI_API_TOKEN,
 };
 
 export const getCurrentPolutionData = async (cityName) => {
-  console.log('API Key:', process.env.WAQI_API_TOKEN);
-
-  // Sanitize the city name and construct the URL
-  const sanitizedCityName = cityName.trim(); // Remove leading/trailing spaces
-  const urlPolution = new URL(sanitizedCityName, BASE_URL).toString();
-
+  const urlPolution = '';
   try {
-    // Perform the GET request using `got`
-    const response = await got(urlPolution, {
-      searchParams: paramsPolution, // Equivalent to query params
-      responseType: 'json', // Automatically parse JSON response
-    });
+    const response = await axios.get(urlPolution);
 
-    // Response handling
-    console.log('Response Data:', response.body);
-    return response.body;
+    if (response?.status === 200) {
+      return response?.data;
+    } else {
+      console.log(`Error in getCurrentPolutionData`, JSON.stringify(response));
+    }
   } catch (error) {
-    // Improved error handling
-    console.error('Request failed in getCurrentPolutionData:', {
-      message: error.message,
-      stack: error.stack,
-      response: error.response?.body,
-    });
+    console.log(
+      `Request failed in getCurrentPolutionData`,
+      JSON.stringify(error)
+    );
   }
 };
 
