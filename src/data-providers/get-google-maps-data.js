@@ -10,7 +10,7 @@ const client = new Client();
 const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
 export const getGoogleMapsData = async (trafficData) => {
-  let res = [];
+  const res = [];
   try {
     for (const traffic of trafficData) {
       const origin = traffic?.origin;
