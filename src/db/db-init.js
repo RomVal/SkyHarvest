@@ -9,6 +9,14 @@ import { logger } from './../logger.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+/**
+ * Asynchronously reads and parses the service account JSON file.
+ *
+ * @async
+ * @function getServiceAccount
+ * @returns {Promise<Object>} A promise that resolves to the service account object.
+ * @throws Will throw an error if the file cannot be read or parsed.
+ */
 async function getServiceAccount() {
   try {
     const filePath = path.join(__dirname, '../../serviceAccountKey.json');
