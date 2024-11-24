@@ -6,7 +6,21 @@ import { logger } from './logger.js';
 // Interval for making requests. As a rule, it should with 1h interval
 const PARSE_INTERVAL = 1000 * 60 * 60;
 
+/**
+ * Starts a loop that periodically makes requests to gather and process city data.
+ * The loop runs at intervals defined by the PARSE_INTERVAL constant.
+ *
+ * @function startRequestLoop
+ */
 const startRequestLoop = () => {
+  /**
+   * Asynchronously makes requests to get combined city data and adds records to each city.
+   * Logs success or error messages.
+   *
+   * @async
+   * @function makeRequests
+   * @returns {Promise<void>} A promise that resolves when all city data has been processed.
+   */
   const makeRequests = async () => {
     try {
       const citiesConfig = loadCitiesConfig();

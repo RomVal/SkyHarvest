@@ -78,6 +78,7 @@ export default [
         {
           require: {
             FunctionDeclaration: true,
+            ArrowFunctionExpression: true,
             MethodDefinition: true,
             ClassDeclaration: true,
           },

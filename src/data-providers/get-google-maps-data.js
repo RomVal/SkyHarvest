@@ -9,6 +9,12 @@ dotenv.config();
 const client = new Client();
 const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
+/**
+ * Fetches Google Maps directions data for a list of traffic data.
+ *
+ * @param {Array} trafficData - An array of traffic data objects, each containing origin and destination properties.
+ * @returns {Promise<Array>} A promise that resolves to an array of parsed Google Maps response data.
+ */
 export const getGoogleMapsData = async (trafficData) => {
   const res = [];
   try {
@@ -37,6 +43,15 @@ export const getGoogleMapsData = async (trafficData) => {
   return res;
 };
 
+/**
+ * Parses the response from Google Maps API to extract relevant data.
+ *
+ * @param {Object} response - The response object from Google Maps API.
+ * @param {number} [response.routes[0].legs[0].distance.value] - Distance value in meters.
+ * @param {number} [response.routes[0].legs[0].duration.value] - Duration value in seconds.
+ * @param {number} [response.routes[0].legs[0].duration_in_traffic.value] - Duration in traffic value in seconds.
+ * @returns {Object} An object containing distance, duration, and duration_in_traffic values.
+ */
 const parseGoogleMapsResponse = (response) => {
   const legs = response?.routes?.[0]?.legs?.[0];
 

@@ -8,6 +8,13 @@ dotenv.config();
 // URL to the service
 const URL = 'http://api.weatherapi.com/v1/current.json';
 
+/**
+ * Fetches the current weather data for a given city.
+ *
+ * @param {string} cityName - The name of the city to fetch weather data for.
+ * @returns {Promise<Object>} The parsed weather data.
+ * @throws Will log an error if the request fails or if the response status is not 200.
+ */
 export const getCurrentWeatherData = async (cityName) => {
   const params = { key: process.env.WEATHER_API_KEY, q: cityName };
   try {
@@ -28,6 +35,21 @@ export const getCurrentWeatherData = async (cityName) => {
   }
 };
 
+/**
+ * Parses the weather response and extracts current weather data.
+ *
+ * @param {Object} response - The weather response object.
+ * @param {Object} response.current - The current weather data.
+ * @param {number} [response.current.temp_c] - The current temperature in Celsius.
+ * @param {number} [response.current.wind_kph] - The current wind speed in kilometers per hour.
+ * @param {number} [response.current.gust_kph] - The current wind gust speed in kilometers per hour.
+ * @param {number} [response.current.pressure_mb] - The current atmospheric pressure in millibars.
+ * @param {number} [response.current.precip_mm] - The current precipitation in millimeters.
+ * @param {number} [response.current.humidity] - The current humidity percentage.
+ * @param {number} [response.current.cloud] - The current cloud cover percentage.
+ * @param {number} [response.current.dewpoint_c] - The current dew point in Celsius.
+ * @returns {Object} An object containing the parsed current weather data.
+ */
 const parseWeatherResponse = (response) => {
   const current = response.current;
 
