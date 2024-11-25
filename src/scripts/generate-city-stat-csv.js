@@ -1,6 +1,16 @@
 import fs from 'fs';
 
 import { db } from '../db/db-init.js';
+import { CITY } from './../default-cities-config.js';
+
+/**
+ * * @constant {CITY}
+ * The name of the city for which statistics are being generated.
+ */
+const CITY_NAME = CITY.berlin;
+// Start and end time (UTC) for which to generate statistics
+const START_DATE = new Date('2024-11-20T00:00:00.000Z');
+const END_DATE = new Date('2024-11-23T23:59:59.999Z');
 
 /**
  * Retrieves data for a given city from a Firestore collection,
@@ -22,21 +32,24 @@ async function getCityCSV(cityName) {
 
     snapshot.forEach((doc) => {
       const data = doc.data();
-
-      const weather = data?.weather;
-      const polution = data?.polution;
-      rows.push(
-        `${doc.id},${weather?.temp_c},${weather?.wind_kph},${weather?.gust_kph},${weather?.pressure_mb},${weather?.precip_mm},${weather?.humidity},${weather?.cloud},${weather?.dewpoint_c},${getTrafficLevel(data?.traffic)},${getTrafficSpeed(data?.traffic)},${polution?.aqi},${polution?.pm10},${polution?.pm25},${polution?.so2},${polution?.no2},${polution?.co}`
-      );
+      const dateToCheck = new Date(doc?.id);
+      if (dateToCheck >= START_DATE && dateToCheck <= END_DATE) {
+        const weather = data?.weather;
+        const polution = data?.polution;
+        const precip_mm = weather?.precip_mm || 0;
+        rows.push(
+          `${doc.id},${weather?.temp_c},${weather?.wind_kph},${weather?.gust_kph},${weather?.pressure_mb},${precip_mm},${weather?.humidity},${weather?.cloud},${weather?.dewpoint_c},${getTrafficLevel(data?.traffic)},${getTrafficSpeed(data?.traffic)},${polution?.aqi},${polution?.pm10},${polution?.pm25},${polution?.so2},${polution?.no2},${polution?.co}`
+        );
+      }
     });
 
     if (rows.length > 1) {
       const fileContent = rows.join('\n');
 
       // Write to the csv file
-      fs.writeFileSync(`users_${cityName}.csv`, fileContent, 'utf8');
+      fs.writeFileSync(`./csv/users_${cityName}.csv`, fileContent, 'utf8');
       // eslint-disable-next-line no-console
-      console.log('Data successully stored in users.csv');
+      console.log(`Data successully stored in users_${cityName}.csv`);
     } else {
       // eslint-disable-next-line no-console
       console.log('No data to store');
@@ -98,4 +111,4 @@ function getTrafficSpeed(traffic) {
   }
 }
 
-getCityCSV('london');
+getCityCSV(CITY_NAME);
