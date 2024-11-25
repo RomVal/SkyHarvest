@@ -1,6 +1,41 @@
+/**
+ * Enum for default city configurations.
+ * @enum {string}
+ */
+export const CITY = {
+  stockholm: 'stockholm',
+  berlin: 'berlin',
+  copenhagen: 'copenhagen',
+  amsterdam: 'amsterdam',
+  athens: 'athens',
+  london: 'london',
+  lisbon: 'lisbon',
+  paris: 'paris',
+  zurich: 'zurich',
+  vancouver: 'vancouver',
+  delhi: 'delhi',
+  los_angeles: 'los-angeles',
+  oslo: 'oslo',
+  singapore: 'singapore',
+  beijing: 'beijing',
+  salzburg: 'salzburg',
+  vienna: 'vienna',
+  poznan: 'poznan',
+  warsaw: 'warsaw',
+  sydney: 'sydney',
+  tokyo: 'tokyo',
+  lviv: 'lviv',
+  kyiv: 'kyiv',
+  dubai: 'dubai',
+  prague: 'prague',
+  brno: 'brno',
+  stuttgart: 'stuttgart',
+  mexico: 'mexico',
+};
+
 export const cities = [
   {
-    name: 'stockholm',
+    name: CITY.stockholm,
     traffic: [
       {
         origin: {
@@ -26,7 +61,7 @@ export const cities = [
     ],
   },
   {
-    name: 'berlin',
+    name: CITY.berlin,
     traffic: [
       {
         origin: {
@@ -52,7 +87,7 @@ export const cities = [
     ],
   },
   {
-    name: 'copenhagen',
+    name: CITY.copenhagen,
     traffic: [
       {
         origin: {
@@ -78,7 +113,7 @@ export const cities = [
     ],
   },
   {
-    name: 'vancouver',
+    name: CITY.vancouver,
     traffic: [
       {
         origin: {
@@ -104,7 +139,7 @@ export const cities = [
     ],
   },
   {
-    name: 'zurich',
+    name: CITY.zurich,
     traffic: [
       {
         origin: {
@@ -130,7 +165,7 @@ export const cities = [
     ],
   },
   {
-    name: 'oslo',
+    name: CITY.oslo,
     traffic: [
       {
         origin: {
@@ -156,7 +191,7 @@ export const cities = [
     ],
   },
   {
-    name: 'singapore',
+    name: CITY.singapore,
     traffic: [
       {
         origin: {
@@ -182,7 +217,7 @@ export const cities = [
     ],
   },
   {
-    name: 'beijing',
+    name: CITY.beijing,
     traffic: [
       {
         origin: {
@@ -208,7 +243,7 @@ export const cities = [
     ],
   },
   {
-    name: 'los-angeles',
+    name: CITY.los_angeles,
     traffic: [
       {
         origin: {
@@ -234,7 +269,7 @@ export const cities = [
     ],
   },
   {
-    name: 'delhi',
+    name: CITY.delhi,
     traffic: [
       {
         origin: {
@@ -260,7 +295,7 @@ export const cities = [
     ],
   },
   {
-    name: 'mexico',
+    name: CITY.mexico,
     traffic: [
       {
         origin: {
@@ -286,7 +321,7 @@ export const cities = [
     ],
   },
   {
-    name: 'stuttgart',
+    name: CITY.stuttgart,
     traffic: [
       {
         origin: {
@@ -312,7 +347,7 @@ export const cities = [
     ],
   },
   {
-    name: 'paris',
+    name: CITY.paris,
     traffic: [
       {
         origin: {
@@ -338,7 +373,7 @@ export const cities = [
     ],
   },
   {
-    name: 'lisbon',
+    name: CITY.lisbon,
     traffic: [
       {
         origin: {
@@ -364,7 +399,7 @@ export const cities = [
     ],
   },
   {
-    name: 'london',
+    name: CITY.london,
     traffic: [
       {
         origin: {
@@ -390,7 +425,7 @@ export const cities = [
     ],
   },
   {
-    name: 'athens',
+    name: CITY.athens,
     traffic: [
       {
         origin: {
@@ -416,7 +451,7 @@ export const cities = [
     ],
   },
   {
-    name: 'amsterdam',
+    name: CITY.amsterdam,
     traffic: [
       {
         origin: {
@@ -442,7 +477,7 @@ export const cities = [
     ],
   },
   {
-    name: 'vienna',
+    name: CITY.vienna,
     traffic: [
       {
         origin: {
@@ -468,7 +503,7 @@ export const cities = [
     ],
   },
   {
-    name: 'salzburg',
+    name: CITY.salzburg,
     traffic: [
       {
         origin: {
@@ -494,7 +529,7 @@ export const cities = [
     ],
   },
   {
-    name: 'warsaw',
+    name: CITY.warsaw,
     traffic: [
       {
         origin: {
@@ -520,7 +555,7 @@ export const cities = [
     ],
   },
   {
-    name: 'poznan',
+    name: CITY.poznan,
     traffic: [
       {
         origin: {
@@ -546,7 +581,7 @@ export const cities = [
     ],
   },
   {
-    name: 'sydney',
+    name: CITY.sydney,
     traffic: [
       {
         origin: {
@@ -572,7 +607,7 @@ export const cities = [
     ],
   },
   {
-    name: 'tokyo',
+    name: CITY.tokyo,
     traffic: [
       {
         origin: {
@@ -598,7 +633,7 @@ export const cities = [
     ],
   },
   {
-    name: 'brno',
+    name: CITY.brno,
     traffic: [
       {
         origin: {
@@ -624,7 +659,7 @@ export const cities = [
     ],
   },
   {
-    name: 'prague',
+    name: CITY.prague,
     traffic: [
       {
         origin: {
@@ -650,7 +685,7 @@ export const cities = [
     ],
   },
   {
-    name: 'dubai',
+    name: CITY.dubai,
     traffic: [
       {
         origin: {
@@ -676,7 +711,7 @@ export const cities = [
     ],
   },
   {
-    name: 'kyiv',
+    name: CITY.kyiv,
     traffic: [
       {
         origin: {
@@ -702,7 +737,7 @@ export const cities = [
     ],
   },
   {
-    name: 'lviv',
+    name: CITY.lviv,
     traffic: [
       {
         origin: {
