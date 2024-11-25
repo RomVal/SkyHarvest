@@ -1,6 +1,6 @@
 import { spawn } from 'child_process';
 
-import { CITY_NAME } from './init.js';
+import { CITY_NAME, END_DATE, START_DATE } from './init.js';
 
 /**
  * @fileoverview This script spawns a Python process to run a specific Python script with given arguments.
@@ -10,6 +10,8 @@ import { CITY_NAME } from './init.js';
 const pythonProcess = spawn('python', [
   'src/scripts/show-city-plot.py',
   CITY_NAME,
+  START_DATE.toISOString(),
+  END_DATE.toDateString(),
 ]);
 
 pythonProcess.stdout.on('data', (data) => {

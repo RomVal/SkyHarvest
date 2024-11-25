@@ -3,12 +3,25 @@ import matplotlib.pyplot as plt
 import sys
 
 cityName = None
+startDate = None
+endDate = None
+
 if len(sys.argv) > 1:
     cityName = sys.argv[1] 
+    startDate = sys.argv[2] 
+    endDate = sys.argv[3] 
+
+print(startDate); print(endDate)
 
 if cityName is None:
     print('Please provide city name as parameter')
     sys.exit()
+
+if startDate is not None:
+    startDate = pd.to_datetime(startDate).strftime('%d-%m-%y:%H')
+
+if endDate is not None:
+    endDate = pd.to_datetime(endDate).strftime('%d-%m-%y:%H')
 
 data = pd.read_csv(f'./csv/users_{cityName}.csv')
 
@@ -20,7 +33,7 @@ column_y4 = 'precip_mm'  # Fourth column for Y axis
 column_dates = 'ID'  # Column with dates for X axis
 
 #Date formatting
-data['formatted_date'] = pd.to_datetime(data[column_dates]).dt.strftime('%d-%m %H')
+data['formatted_date'] = pd.to_datetime(data[column_dates]).dt.strftime('%d-%m-%y:%H')
 
 #Converting data to arrays
 y_values_1 = data[column_y1].dropna().to_list()
@@ -38,7 +51,7 @@ plt.plot(x_labels, y_values_2, label=f'Wind speed "{column_y2}"', marker='x')
 plt.plot(x_labels, y_values_3, label=f'Polution "{column_y3}"', marker='*')
 plt.plot(x_labels, y_values_4, label=f'Precip_mm "{column_y4}"', marker='.')
 
-plt.title(f'Polution in {cityName.capitalize()}')
+plt.title(f'Polution in {cityName.capitalize()} between {startDate} and {endDate} UTC time')
 plt.xlabel('Timestamp')
 plt.ylabel('Value')
 plt.xticks(rotation=45, ha='right')

@@ -7,7 +7,8 @@
     "lint": "eslint .",
     "prepare": "husky",
     "generate-city-stats": "node src/scripts/generate-city-stat-csv.js",
-    "show-city-stats": "node src/scripts/run-city-plot.js"
+    "show-city-stats": "node src/scripts/run-city-plot.js",
+    "show-city-stats-complete": "npm run generate-city-stats && npm run show-city-stats"
   },
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.4.0",
