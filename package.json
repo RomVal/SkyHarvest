@@ -6,7 +6,8 @@
     "start": "node src/app.js",
     "lint": "eslint .",
     "prepare": "husky",
-    "generate-city-stat": "node src/scripts/generate-city-stat-csv.js"
+    "generate-city-stats": "node src/scripts/generate-city-stat-csv.js",
+    "show-city-stats": "node src/scripts/run-city-plot.js"
   },
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.4.0",

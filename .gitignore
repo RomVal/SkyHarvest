@@ -1,4 +1,6 @@
 node_modules
 serviceAccountKey.json
+csv/*
+!csv/city-example.csv
 .vscode
 .env
