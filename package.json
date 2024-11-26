@@ -8,7 +8,8 @@
     "prepare": "husky",
     "generate-city-stats": "node src/scripts/generate-city-stat-csv.js",
     "show-city-stats": "node src/scripts/run-city-plot.js",
-    "show-city-stats-complete": "npm run generate-city-stats && npm run show-city-stats"
+    "show-city-stats-complete": "npm run generate-city-stats && npm run show-city-stats",
+    "correlation": "npm run generate-city-stats && node src/scripts/run-correlation.js"
   },
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.4.0",
