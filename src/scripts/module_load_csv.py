@@ -5,43 +5,14 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from gmdh import Mia, Combi, Ria
 import matplotlib.pyplot as plt
+from genetics_types import Columns, LAGS
 
 #Module for loading data from csv file and creating lags
 
 file_path = "./../../csv/users_berlin.csv"
 #file_path = "./../../csv/users_amsterdam.csv"
 
-class Columns(Enum):
-    ID = 'ID'
-    TEMP_C = 'temp_c'
-    WIND_KPH = 'wind_kph'
-    GUST_KPH = 'gust_kph'
-    PRESSURE_MB = 'pressure_mb'
-    PRECIP_MM = 'precip_mm'
-    HUMIDITY = 'humidity'
-    CLOUD = 'cloud'
-    DEWPOINT_C = 'dewpoint_c'
-    TRAFFIC_LEVEL = 'traffic_level'
-    TRAFFIC_SPEED = 'traffic_speed'
-    AQI = 'aqi'
-    PM10 = 'pm10'
-    PM25 = 'pm25'
-    SO2 = 'so2'
-    NO2 = 'no2'
-    CO = 'co'
-
-LAGS = [(Columns.WIND_KPH, )]
-
-LAGS = {
-    Columns.WIND_KPH: 120,
-    Columns.TRAFFIC_LEVEL: 120,
-    Columns.HUMIDITY: 10,
-    Columns.TEMP_C: 10,
-    Columns.PRECIP_MM: 10,
-    Columns.CLOUD: 10
-}
-
-AGREGATE = '3H'
+AGREGATE = '2H'
 
 # Load tha data and convert to numeric values except for the ID column which is converted to datetime
 data = pd.read_csv(file_path)
@@ -54,7 +25,6 @@ for column in Columns:
 
 
 data.fillna(0, inplace=True)
-print(data.head(3))
 
 #Add lags
 for column, lag in LAGS.items():
